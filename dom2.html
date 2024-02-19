@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaderboard</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  .container {
+    margin-top: 50px;
+  }
+  .scoreboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .scoreboard label {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .scoreboard input {
+    width: 100px;
+    font-size: 20px;
+    text-align: center;
+  }
+  .score-box {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="scoreboard">
+    <div>
+      <label for="minScore">MIN</label>
+      <input type="text" id="minScore" value="">
+    </div>
+    <div>
+      <label for="maxScore">MAX</label>
+      <input type="text" id="maxScore" value="">
+    </div>
+  </div>
+  
+  <div class="score-box" id="scoreBox"></div>
+  
+  <div>
+    <button onclick="resetScore()">RESET</button>
+  </div>
+</div>
+
+<script>
+  let minScore = Infinity;
+  let maxScore = -Infinity;
+
+  function updateScores(score) {
+    minScore = Math.min(minScore, score);
+    maxScore = Math.max(maxScore, score);
+    document.getElementById('minScore').value = minScore;
+    document.getElementById('maxScore').value = maxScore;
+  }
+
+  function addNumber(number) {
+    const scoreBox = document.getElementById('scoreBox');
+    scoreBox.textContent += number;
+  }
+
+  function enterScore() {
+    const scoreBox = document.getElementById('scoreBox');
+    const score = parseInt(scoreBox.textContent);
+    if (!isNaN(score)) {
+      updateScores(score);
+      scoreBox.textContent = '';
+    } else {
+      alert('Please enter a valid score.');
+    }
+  }
+
+  function resetScore() {
+    document.getElementById('scoreBox').textContent = '';
+  }
+</script>
+
+</body>
+</html>
